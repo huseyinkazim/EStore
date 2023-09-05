@@ -40,8 +40,8 @@ namespace EStore.Service.CouponApi.Controllers
 			return _response;
 		}
 
-		[HttpGet]
-		[Route("{id:int}")]
+		[HttpGet("{id:int}")]
+		//[Route("{id:int}")]
 		public ResponseDto Get(int id)
 		{
 			try
@@ -59,8 +59,8 @@ namespace EStore.Service.CouponApi.Controllers
 		}
 
 
-		[HttpGet]
-		[Route("GetByCode/{code}")]
+		[HttpGet("GetByCode/{code}")]
+		//[Route("GetByCode/{code}")]
 		public ResponseDto GetByCode(string code)
 		{
 			try
