@@ -31,8 +31,8 @@ namespace EStore.Service.AuthApi.Controllers
 			return Ok(_response);
 		}
 
-		[HttpPost("login")]
-		public async Task<IActionResult> Login([FromBody]LoginRequestDto model)
+		[HttpPost("Login")]
+		public async Task<IActionResult> Login([FromBody] LoginRequestDto model)
 		{
 			var loginResponse = await _authService.Login(model);
 			if (loginResponse.User == null)
@@ -45,15 +45,17 @@ namespace EStore.Service.AuthApi.Controllers
 			return Ok(_response);
 		}
 
-
-	
-
-
-	[HttpPost("register")]
-	public async Task<IActionResult> Register([FromBody] RegistrationRequestDto model)
-	{
-
-		
+		[HttpPost("AssignRole")]
+		public async Task<IActionResult> AssignRole([FromBody] AssignRoleRequestDto model)
+		{
+			var assignRoleSuccessful = await _authService.AssignRole(model.Email, model.Role.ToUpper());
+			if (!assignRoleSuccessful)
+			{
+				_response.IsSuccess = false;
+				_response.Message = "Error encountered";
+				return BadRequest(_response);
+			}
+			return Ok(_response);
+		}
 	}
-}
 }
