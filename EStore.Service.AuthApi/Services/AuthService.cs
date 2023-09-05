@@ -12,13 +12,15 @@ namespace EStore.Service.AuthApi.Services
 		private readonly ApplicationDbContext _db;
 		private readonly UserManager<ApplicationUser> _userManager;
 		private readonly RoleManager<IdentityRole> _roleManager;
+		private readonly IJwtTokenGenerator _jwtTokenGenerator;
 
 		public AuthService(ApplicationDbContext db,
-			UserManager<ApplicationUser> userManager, RoleManager<IdentityRole> roleManager)
+			UserManager<ApplicationUser> userManager, RoleManager<IdentityRole> roleManager, IJwtTokenGenerator jwtTokenGenerator)
 		{
 			_db = db;
 			_userManager = userManager;
 			_roleManager = roleManager;
+			_jwtTokenGenerator = jwtTokenGenerator;
 		}
 
 
@@ -35,6 +37,7 @@ namespace EStore.Service.AuthApi.Services
 			}
 
 			//if user was found , Generate JWT Token
+			var token = _jwtTokenGenerator.GenerateToken(user);
 
 			UserDto userDTO = new()
 			{
@@ -47,7 +50,7 @@ namespace EStore.Service.AuthApi.Services
 			LoginResponseDto loginResponseDto = new LoginResponseDto()
 			{
 				User = userDTO,
-				Token = ""
+				Token = token
 			};
 
 			return loginResponseDto;
