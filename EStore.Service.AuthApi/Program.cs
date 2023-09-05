@@ -3,6 +3,9 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using System;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using EStore.Service.AuthApi.Models;
+using EStore.Service.AuthApi.IServices;
+using EStore.Service.AuthApi.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,9 +14,15 @@ builder.Services.AddDbContext<ApplicationDbContext>(option =>
 {
 	option.UseSqlServer(builder.Configuration.GetConnectionString("myDb1"));
 });
-builder.Services.AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkStores<ApplicationDbContext>()
+builder.Services.Configure<JwtOptions>(builder.Configuration.GetSection("ApiSettings:JwtOptions"));
+builder.Services.AddIdentity<ApplicationUser, IdentityRole>().AddEntityFrameworkStores<ApplicationDbContext>()
 	.AddDefaultTokenProviders();
+
 builder.Services.AddControllers();
+
+builder.Services.AddScoped<IAuthService, AuthService>();
+builder.Services.AddScoped<IJwtTokenGenerator, JwtTokenGenerator>();
+
 builder.Services.AddCors(options =>
 {
 	options.AddPolicy("AllowLocalhost", r =>
