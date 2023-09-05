@@ -11,18 +11,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddCors(options =>
-{
-	options.AddPolicy("AllowLocalhost", r =>
-	{
-		r
-			//.WithOrigins("http://localhost:4200")
-			.WithOrigins(builder.Configuration["AllowedHosts"])
 
-			.AllowAnyHeader()
-			.AllowAnyMethod();
-	});
-});
 // Add services to the container.
 builder.Services.AddDbContext<ApplicationDbContext>(option =>
 {
@@ -36,33 +25,19 @@ builder.Services.AddControllers();
 
 builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddScoped<IJwtTokenGenerator, JwtTokenGenerator>();
-
-var app = builder.Build();
-app.Use(async (context, next) =>
+builder.Services.AddCors(options =>
 {
-	var currentEndpoint = context.GetEndpoint();
-
-	if (currentEndpoint is null)
+	options.AddPolicy("AllowLocalhost", r =>
 	{
-		await next(context);
-		return;
-	}
+		r
+			//.WithOrigins("http://localhost:4200")
+			.WithOrigins(builder.Configuration["CorsAllowedOrigins"].Split(","))
 
-	Console.WriteLine($"Endpoint: {currentEndpoint.DisplayName}");
-
-	if (currentEndpoint is RouteEndpoint routeEndpoint)
-	{
-		Console.WriteLine($"  - Route Pattern: {routeEndpoint.RoutePattern}");
-	}
-
-	foreach (var endpointMetadata in currentEndpoint.Metadata)
-	{
-		Console.WriteLine($"  - Metadata: {endpointMetadata}");
-	}
-
-	await next(context);
+			.AllowAnyHeader()
+			.AllowAnyMethod();
+	});
 });
-app.UseRouting();
+var app = builder.Build();
 
 app.UseCors("AllowLocalhost");
 app.UseMiddleware<CorsErrorLoggerMiddleware>();

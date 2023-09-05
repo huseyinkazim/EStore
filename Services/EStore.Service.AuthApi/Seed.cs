@@ -28,7 +28,7 @@
 					Email = "admin@example.com" // Admin e-posta adresini burada belirleyebilirsiniz
 				};
 
-				var result = await userManager.CreateAsync(adminUser, "admin"); // Admin şifresini burada belirleyebilirsiniz
+				var result = await userManager.CreateAsync(adminUser, "Qwert!2345"); // Admin şifresini burada belirleyebilirsiniz
 
 				if (result.Succeeded)
 				{

@@ -11,10 +11,7 @@ export class AppComponent {
   pageTitle = 'EStore.UI';
   currentYear: number = new Date().getFullYear();
   constructor(private router: Router,
-    private authService: AuthService) {
-
-     // this.authService.test(); 
-     }
+    private authService: AuthService) {     }
 
   isLoggedIn() {
     return this.authService.isUserLoggedIn(); 
