@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
+import { AuthService } from './service/auth.service';
 
 @Component({
   selector: 'app-root',
@@ -8,5 +10,22 @@ import { Component } from '@angular/core';
 export class AppComponent {
   pageTitle = 'EStore.UI';
   currentYear: number = new Date().getFullYear();
+  constructor(private router: Router,
+    private authService: AuthService) {
+
+     // this.authService.test(); 
+     }
+
+  isLoggedIn() {
+    return this.authService.isUserLoggedIn(); 
+  }
+
+  redirectToLogin() {
+    this.router.navigate(['/login']);
+  }
+
+  redirectToRegister() {
+    this.router.navigate(['/register']);
+  }
 
 }

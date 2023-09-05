@@ -5,6 +5,7 @@ namespace EStore.Service.CouponApi.Context
 {
 	public class ApplicationDbContext : DbContext
 	{
+
 		public ApplicationDbContext(DbContextOptions options) : base(options)
 		{
 
@@ -26,14 +27,6 @@ namespace EStore.Service.CouponApi.Context
 				MinAmount = 20
 			});
 
-
-			modelBuilder.Entity<Coupon>().HasData(new Coupon
-			{
-				CouponId = 2,
-				CouponCode = "20OFF",
-				DiscountAmount = 20,
-				MinAmount = 40
-			});
 		}
 	}
 }

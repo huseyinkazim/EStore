@@ -3,5 +3,6 @@ export class ResponseDto {
     result: any;
     displayMessage: string = "";
     errorMessages: string[] | null = null;
+    message:string="";
   }
   

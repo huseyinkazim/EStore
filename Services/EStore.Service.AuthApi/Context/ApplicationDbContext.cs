@@ -16,6 +16,8 @@ namespace EStore.Service.AuthApi.Context
 		protected override void OnModelCreating(ModelBuilder modelBuilder)
 		{
 			base.OnModelCreating(modelBuilder);
+
+
 		}
 	}
 }

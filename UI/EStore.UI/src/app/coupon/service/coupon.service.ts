@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -11,8 +11,16 @@ export class CouponService {
   constructor(private http: HttpClient) {}
 
   getAll(): Observable<any> {
-    return this.http.get(`${this.baseUrl}`);
-  }
+ // İsteği gönderirken headers ve credentials seçeneklerini ayarlayın
+ const httpOptions = {
+  headers: new HttpHeaders({
+    'Accept': 'application/json',
+    'Authorization': 'Bearer your-token'
+  }),
+  withCredentials: true // credentials seçeneğini 'include' olarak ayarlayın
+};
+
+return this.http.get(this.baseUrl, httpOptions);  }
 
   getById(id: number): Observable<any> {
     return this.http.get(`${this.baseUrl}/${id}`);

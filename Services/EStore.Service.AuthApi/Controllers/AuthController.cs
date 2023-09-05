@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Http;
 using EStore.Service.AuthApi.IServices;
 using EStore.Service.AuthApi.Models.Dtos;
+using Microsoft.AspNetCore.Cors;
 
 namespace EStore.Service.AuthApi.Controllers
 {
@@ -17,7 +18,11 @@ namespace EStore.Service.AuthApi.Controllers
 			_authService = authService;
 			_response = new();
 		}
-
+		[HttpGet("test")]
+		public string test()
+		{
+			return "test";
+		}
 		[HttpPost("Register")]
 		public async Task<IActionResult> Register([FromBody] RegistrationRequestDto model)
 		{

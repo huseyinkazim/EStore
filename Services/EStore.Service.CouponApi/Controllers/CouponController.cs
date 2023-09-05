@@ -1,11 +1,8 @@
 ﻿using AutoMapper;
-using Azure;
 using EStore.Service.CouponApi.Context;
 using EStore.Service.CouponApi.Models;
 using EStore.Service.CouponApi.Models.Dto;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
 
 namespace EStore.Service.CouponApi.Controllers
 {
@@ -40,8 +37,8 @@ namespace EStore.Service.CouponApi.Controllers
 			return _response;
 		}
 
-		[HttpGet("{id:int}")]
-		//[Route("{id:int}")]
+		[HttpGet]
+		[Route("{id:int}")]
 		public ResponseDto Get(int id)
 		{
 			try
@@ -59,8 +56,8 @@ namespace EStore.Service.CouponApi.Controllers
 		}
 
 
-		[HttpGet("GetByCode/{code}")]
-		//[Route("GetByCode/{code}")]
+		[HttpGet]
+		[Route("GetByCode/{code}")]
 		public ResponseDto GetByCode(string code)
 		{
 			try
