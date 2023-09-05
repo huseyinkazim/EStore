@@ -17,13 +17,15 @@ builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 builder.Services.AddControllers();
 builder.Services.AddCors(options =>
 {
-	options.AddPolicy("AllowLocalhost", builder =>
+	options.AddPolicy("AllowLocalhost", r =>
 	{
-		builder.WithOrigins("http://localhost:4200")
-			   .AllowAnyHeader()
-			   .AllowAnyMethod();
+		r
+			.WithOrigins(builder.Configuration["AllowedHosts"]) 
+			.AllowAnyHeader()
+			.AllowAnyMethod();
 	});
 });
+
 var app = builder.Build();
 app.UseCors("AllowLocalhost");
 
