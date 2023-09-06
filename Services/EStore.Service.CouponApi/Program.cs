@@ -1,6 +1,8 @@
 using AutoMapper;
 using EStore.Service.CouponApi.Context;
+using EStore.Service.CouponApi.Extensions;
 using EStore.Service.CouponApi.Mapping;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using System;
@@ -28,12 +30,18 @@ builder.Services.AddCors(options =>
 });
 builder.Services.AddCors();
 
+builder.AddAppAuthetication();
+builder.Services.AddAppAuthorization();
+
+// DI'yi yapýlandýrýn
+builder.Services.AddSingleton<IAuthorizationHandler, CustomAuthorizationHandler>();
 var app = builder.Build();
 
 app.UseCors("AllowLocalhost");
 
 // Configure the HTTP request pipeline.
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();

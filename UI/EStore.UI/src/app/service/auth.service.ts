@@ -12,6 +12,7 @@ import { Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
 import { ApiService } from './api.service';
 import { ResponseDto } from '../common/responsedto';
+import { ObjectUtil } from '../common/Extension';
 
 @Injectable({
   providedIn: 'root'
@@ -19,7 +20,6 @@ import { ResponseDto } from '../common/responsedto';
 export class AuthService {
   private apiUrl = 'http://localhost:5257/api/Auth'; // API URL'sini buraya ekleyin
   private _unsubscribe$: Subject<void> = new Subject<void>();
-  private isAuthenticated: boolean = false;
   private tokenKey = 'authToken'; // Çerez anahtarı (key)
 
   constructor(private http: HttpClient,
@@ -27,23 +27,20 @@ export class AuthService {
     private router: Router,
     private cookieService: CookieService,
     private apiService: ApiService) { }
-  isNullOrUndefined(obj: any) {
-    return typeof obj === "undefined" || obj === null;
-  }
+
   // Kullanıcı girişi
   login(loginRequest: LoginRequestDto) {
     this.apiService.sendRequest<ResponseDto>(`${this.apiUrl}/Login`, HttpMethod.POST, loginRequest)
       .subscribe((data) => {
-        if (this.isNullOrUndefined(data) || !data.isSuccess) {
+        if (ObjectUtil.isNullOrUndefined(data) || !data.isSuccess) {
           this.toastr.warning('Kullanıcı adı ya da şifreyi yanlış girdiniz.', 'Login Başarsız');
         }
         else {
           var response = data.result as LoginResponseDto;
+          this.saveToken(response.token);
           this.toastr.success('Login işleminiz başarılı anasayfaya yönlendirileceksiniz.', 'Login Başarılı');
           this.router.navigate(['/coupons']);
-
         }
-
       },
         (error: any) => {
           console.log(error);
@@ -54,17 +51,7 @@ export class AuthService {
 
   // Kullanıcı kaydı
   register(registrationRequest: RegistrationRequestDto) {
-    this.apiService.sendRequest(`${this.apiUrl}/register`, HttpMethod.POST, registrationRequest)
-      .subscribe(
-        (data) => {
-          console.log(data);
-          this.toastr.success('Kupon başarılı oluşturuldu', 'Oluşturma Onay');
-        },
-        (error) => {
-          console.log(error);
-          this.toastr.error('Kupon oluşturulurken beklenmedik hata!', 'Oluşturma Hatası');
-        }
-      );
+    return this.apiService.sendRequest(`${this.apiUrl}/register`, HttpMethod.POST, registrationRequest);
   }
 
   // Kullanıcı rol atama
@@ -83,11 +70,15 @@ export class AuthService {
   }
 
   isUserLoggedIn() {
-    return this.isAuthenticated;
+    if (ObjectUtil.isNullOrUndefinedOrEmpty(this.getToken()))
+      return false;
+    return true;;
   }
   // Token'ı çereze kaydetme işlemi
   saveToken(token: string): void {
-    this.cookieService.set(this.tokenKey, token);
+    const expirationDate = new Date();
+    expirationDate.setDate(expirationDate.getDate() + 7);
+    this.cookieService.set(this.tokenKey, token, expirationDate);
   }
 
   // Kaydedilmiş token'ı çerezden alma işlemi

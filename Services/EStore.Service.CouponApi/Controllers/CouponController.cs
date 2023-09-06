@@ -2,10 +2,12 @@
 using EStore.Service.CouponApi.Context;
 using EStore.Service.CouponApi.Models;
 using EStore.Service.CouponApi.Models.Dto;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EStore.Service.CouponApi.Controllers
 {
+	[Authorize]
 	[ApiController]
 	[Route("api/[controller]")]
 	public class CouponController : ControllerBase
@@ -55,7 +57,6 @@ namespace EStore.Service.CouponApi.Controllers
 			return _response;
 		}
 
-
 		[HttpGet]
 		[Route("GetByCode/{code}")]
 		public ResponseDto GetByCode(string code)
@@ -74,6 +75,7 @@ namespace EStore.Service.CouponApi.Controllers
 			return _response;
 		}
 
+		[Authorize(Roles = "admin")]
 		[HttpPost]
 		public ResponseDto Post([FromBody] CouponDto couponDto)
 		{
@@ -95,6 +97,7 @@ namespace EStore.Service.CouponApi.Controllers
 		}
 
 
+		[Authorize(Roles = "admin")]
 		[HttpPut]
 		public ResponseDto Update([FromBody] CouponDto couponDto)
 		{
@@ -115,6 +118,7 @@ namespace EStore.Service.CouponApi.Controllers
 			return _response;
 		}
 
+		[Authorize(Roles = "admin")]
 		[HttpDelete("{id}")]
 		public ResponseDto Delete(int id)
 		{

@@ -3,5 +3,6 @@ export class RegistrationRequestDto {
     name: string;
     phoneNumber: string;
     password: string;
+    confirmPassword:string;
   }
   

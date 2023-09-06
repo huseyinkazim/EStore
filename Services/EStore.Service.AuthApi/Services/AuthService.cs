@@ -7,7 +7,7 @@ using EStore.Service.AuthApi.IServices;
 
 namespace EStore.Service.AuthApi.Services
 {
-	public class AuthService: IAuthService
+	public class AuthService : IAuthService
 	{
 		private readonly ApplicationDbContext _db;
 		private readonly UserManager<ApplicationUser> _userManager;
@@ -48,9 +48,9 @@ namespace EStore.Service.AuthApi.Services
 			{
 				return new LoginResponseDto() { User = null, Token = "" };
 			}
-
+			var roles = await _userManager.GetRolesAsync(user);
 			//if user was found , Generate JWT Token
-			var token = _jwtTokenGenerator.GenerateToken(user);
+			var token = _jwtTokenGenerator.GenerateToken(user, roles);
 
 			UserDto userDTO = new()
 			{
@@ -94,18 +94,15 @@ namespace EStore.Service.AuthApi.Services
 						Name = userToReturn.Name,
 						PhoneNumber = userToReturn.PhoneNumber
 					};
-
+					await AssignRole(userDto.Email, "user");
 					return userDto;
-
 				}
 				else
 				{
-					
 				}
 			}
 			catch (Exception ex)
 			{
-
 			}
 			return new UserDto();
 		}
