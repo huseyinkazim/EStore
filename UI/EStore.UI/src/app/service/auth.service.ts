@@ -39,7 +39,7 @@ export class AuthService {
           var response = data.result as LoginResponseDto;
           this.saveToken(response.token);
           this.toastr.success('Login işleminiz başarılı anasayfaya yönlendirileceksiniz.', 'Login Başarılı');
-          this.router.navigate(['/coupons']);
+          this.router.navigate(['/home']);
         }
       },
         (error: any) => {
@@ -51,7 +51,21 @@ export class AuthService {
 
   // Kullanıcı kaydı
   register(registrationRequest: RegistrationRequestDto) {
-    return this.apiService.sendRequest(`${this.apiUrl}/register`, HttpMethod.POST, registrationRequest);
+    return this.apiService.sendRequest<ResponseDto>(`${this.apiUrl}/register`, HttpMethod.POST, registrationRequest)
+      .subscribe(
+        (data) => {
+          console.log(data);
+          var userDto = data.result as UserDto;
+          if (!data.isSuccess)
+            this.toastr.warning(data.message, 'Kayıt Uyarısı');
+          else
+            this.toastr.success('Kayıt işlemi başarılı', 'Kayıt Onay');
+        },
+        (error) => {
+          console.log(error);
+          this.toastr.error('Kayıt işlemi sırasında beklenmedik hata!', 'Kayıt Hatası');
+        }
+      );
   }
 
   // Kullanıcı rol atama
@@ -60,11 +74,11 @@ export class AuthService {
       .subscribe(
         (data) => {
           console.log(data);
-          this.toastr.success('Kupon başarılı oluşturuldu', 'Oluşturma Onay');
+          this.toastr.success('Rol ataması başarılı', 'Rol Onay');
         },
         (error) => {
           console.log(error);
-          this.toastr.error('Kupon oluşturulurken beklenmedik hata!', 'Oluşturma Hatası');
+          this.toastr.error('Rol ataması sırasında beklenmedik hata!', 'Rol Hatası');
         }
       );
   }
@@ -90,4 +104,5 @@ export class AuthService {
   removeToken(): void {
     this.cookieService.delete(this.tokenKey);
   }
+  
 }

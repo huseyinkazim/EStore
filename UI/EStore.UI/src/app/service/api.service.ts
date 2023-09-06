@@ -16,49 +16,31 @@ export class ApiService {
     let token = this.cookieService.get(this.tokenKey);
 
     let response: Observable<T>;
-
+    let headers: HttpHeaders;
     if (token) {
-      const headers = new HttpHeaders({
+      headers = new HttpHeaders({
         'Authorization': `Bearer ${token}`
       });
-
-      switch (method) {
-        case HttpMethod.GET:
-          response = this.http.get<T>(`${apiUrl}`, { headers });
-          break;
-        case HttpMethod.POST:
-          response = this.http.post<T>(`${apiUrl}`, body, { headers });
-          break;
-        case HttpMethod.PUT:
-          response = this.http.put<T>(`${apiUrl}`, body, { headers });
-          break;
-        case HttpMethod.DELETE:
-          response = this.http.delete<T>(`${apiUrl}`, { headers });
-          break;
-        default:
-          throw new Error('Unsupported HTTP method');
-      }
     } else {
-      const headers = new HttpHeaders({
-      });
-      switch (method) {
-        case HttpMethod.GET:
-          response = this.http.get<T>(`${apiUrl}`, { headers });
-          break;
-        case HttpMethod.POST:
-          response = this.http.post<T>(`${apiUrl}`, body, { headers });
-          break;
-        case HttpMethod.PUT:
-          response = this.http.put<T>(`${apiUrl}`, body, { headers });
-          break;
-        case HttpMethod.DELETE:
-          response = this.http.delete<T>(`${apiUrl}`, { headers });
-          break;
-        default:
-          throw new Error('Unsupported HTTP method');
-      }
+      headers = new HttpHeaders({});
     }
+    switch (method) {
+      case HttpMethod.GET:
+        response = this.http.get<T>(`${apiUrl}`, { headers });
+        break;
+      case HttpMethod.POST:
+        response = this.http.post<T>(`${apiUrl}`, body, { headers });
+        break;
+      case HttpMethod.PUT:
+        response = this.http.put<T>(`${apiUrl}`, body, { headers });
+        break;
+      case HttpMethod.DELETE:
+        response = this.http.delete<T>(`${apiUrl}`, { headers });
+        break;
+      default:
+        throw new Error('Unsupported HTTP method');
+    }
+
     return response;
   }
-
 }

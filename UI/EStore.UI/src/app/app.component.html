@@ -24,18 +24,19 @@
             <nav
                 class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark border-bottom box-shadow mb-3">
                 <div class="container">
-                    <a class="navbar-brand" [routerLink]="['/home']"><img
-                            width="35px" src="assets/images/mango.png" /> EStore</a>
+                    <a class="navbar-brand" [routerLink]="['/home']">
+                        <img width="35px" src="assets/images/mango.png" />
+                        EStore
+                    </a>
                     <button class="navbar-toggler" type="button"
                         data-toggle="collapse" data-target=".navbar-collapse"
                         aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
                     </button>
-                    <div
-                        class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
-                        <!-- Login ve Register bağlantıları -->
-                        <ng-container *ngIf="isLoggedIn(); else loginLink">
+                    <ng-container *ngIf="isLoggedIn(); else loginLink">
+                        <div
+                            class="navbar-collapse collapse d-sm-inline-flex">
 
                             <ul class="navbar-nav flex-grow-1">
                                 <li class="nav-item pt-lg-1">
@@ -49,26 +50,30 @@
                                     <a class="nav-link"
                                         [routerLink]="['/product']">Product</a>
                                 </li>
-                                <li class="nav-item pt-lg-1">
-                                    <a class="nav-link" [routerLink]="['/cart']">
-                                        <i class="fas fa-shopping-cart"></i>
-                                    </a>
-                                </li>
                             </ul>
-                        </ng-container>
-                        <ng-template #loginLink>
-                            <div class="navbar-nav">
-
-                                <a class="nav-link" 
-                                    (click)="redirectToLogin()">Login</a>
-                                <a class="nav-link" 
+                            <div class="navbar-nav ml-auto">
+                                <a class="nav-link"> Hello {{getUserName()}} </a>
+                                <a class="nav-link" [routerLink]="['/cart']">
+                                    My Cart <i class="fas fa-shopping-cart"></i>
+                                </a>
+                                <a class="nav-link" (click)="logout()">Logout</a>
+                            </div>
+                        </div>
+                    </ng-container>
+                    <ng-template #loginLink>
+                        <div
+                            class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
+                            <div class="navbar-nav ml-auto">
+                                <a class="nav-link" (click)="redirectToLogin()">Login</a>
+                                <a class="nav-link"
                                     (click)="redirectToRegister()">Register</a>
                             </div>
-                         </ng-template>
-                    </div>
+                        </div>
+                    </ng-template>
                 </div>
             </nav>
         </header>
+
         <div class="container">
             <router-outlet></router-outlet>
         </div>
