@@ -13,9 +13,7 @@ import { Router } from '@angular/router';
 export class RegistrationComponent {
   registrationData: RegistrationRequestDto = new RegistrationRequestDto();
 
-  constructor(private authService: AuthService,
-    private toastr: ToastrService,
-    private router: Router) { }
+  constructor(private authService: AuthService) { }
 
   onRegisterSubmit(): void {
     if (this.registrationData.password !== this.registrationData.confirmPassword) {
