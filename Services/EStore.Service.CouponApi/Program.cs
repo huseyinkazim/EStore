@@ -18,12 +18,13 @@ builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 // Add services to the container.
 
 builder.Services.AddControllers();
+var orgin=builder.Configuration["CorsAllowedOrigins"].Split(",");
 builder.Services.AddCors(options =>
 {
 	options.AddPolicy("AllowLocalhost", r =>
 	{
 		r
-			.WithOrigins("http://localhost:4200")
+			.WithOrigins(orgin)
 			.AllowAnyHeader()
 			.AllowAnyMethod();
 	});

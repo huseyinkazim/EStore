@@ -3,16 +3,17 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { CouponComponent } from './coupon/coupon/coupon.component';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule, Routes } from '@angular/router';
-import { LoginComponent } from './login/login.component';
 import { CookieService } from 'ngx-cookie-service';
-import { RegistrationComponent } from './registration/registration.component';
-import { HomeComponent } from './home/home.component'; // ngx-cookie-service'yi içe aktarın
+import { CouponComponent } from './pages/coupon/coupon/coupon.component';
+import { LoginComponent } from './pages/login/login.component';
+import { RegistrationComponent } from './pages/registration/registration.component';
+import { HomeComponent } from './pages/home/home.component';
+import { ProductComponent } from './pages/product/product.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { HomeComponent } from './home/home.component'; // ngx-cookie-service'yi 
     CouponComponent,
     LoginComponent,
     RegistrationComponent,
-    HomeComponent    
+    HomeComponent,
+    ProductComponent    
   ],
   imports: [
     BrowserModule,

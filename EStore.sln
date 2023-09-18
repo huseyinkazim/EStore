@@ -11,6 +11,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EStore.Service.CouponApi", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EStore.Service.AuthApi", "Services\EStore.Service.AuthApi\EStore.Service.AuthApi.csproj", "{A2EF203B-0F09-4504-999E-6529CC366B72}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EStore.Service.ShoppingCartApi", "EStore.Service.ShoppingCartApi\EStore.Service.ShoppingCartApi.csproj", "{1A3BBC57-5BFB-49C2-A919-240069E57613}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -29,6 +31,10 @@ Global
 		{A2EF203B-0F09-4504-999E-6529CC366B72}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A2EF203B-0F09-4504-999E-6529CC366B72}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A2EF203B-0F09-4504-999E-6529CC366B72}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1A3BBC57-5BFB-49C2-A919-240069E57613}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1A3BBC57-5BFB-49C2-A919-240069E57613}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1A3BBC57-5BFB-49C2-A919-240069E57613}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1A3BBC57-5BFB-49C2-A919-240069E57613}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -37,6 +43,7 @@ Global
 		{9E24B772-1BA3-41EB-B1C8-9F466D8530BD} = {CA511B74-39EF-42BF-AFBF-9C997BD80F08}
 		{EDDFE10A-1353-455B-83A5-E2BA29CC9E98} = {CA511B74-39EF-42BF-AFBF-9C997BD80F08}
 		{A2EF203B-0F09-4504-999E-6529CC366B72} = {CA511B74-39EF-42BF-AFBF-9C997BD80F08}
+		{1A3BBC57-5BFB-49C2-A919-240069E57613} = {CA511B74-39EF-42BF-AFBF-9C997BD80F08}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {01D2EADE-38D4-4207-8B55-2A5581F2F139}

@@ -1,9 +1,6 @@
 import { Component } from '@angular/core';
-import { AuthService } from '../service/auth.service';
-import { RegistrationRequestDto } from '../common/RegistrationRequestDto';
-import { ResponseDto } from '../common/responsedto';
-import { ToastrService } from 'ngx-toastr';
-import { Router } from '@angular/router';
+import { RegistrationRequestDto } from 'src/app/common/RegistrationRequestDto';
+import { AuthService } from 'src/app/service/auth.service';
 
 @Component({
   selector: 'app-registration',

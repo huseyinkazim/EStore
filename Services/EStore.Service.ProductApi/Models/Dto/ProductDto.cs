@@ -10,5 +10,7 @@ namespace EStore.Service.ProductApi.Models.Dto
 		public string Description { get; set; }
 		public string CategoryName { get; set; }
 		public string ImageUrl { get; set; }
+		public int StockQuantity { get; set; }
+
 	}
 }

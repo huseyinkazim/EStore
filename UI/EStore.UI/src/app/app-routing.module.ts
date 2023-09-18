@@ -1,11 +1,12 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { CouponComponent } from './coupon/coupon/coupon.component';
-import { LoginComponent } from './login/login.component';
-import { RegistrationComponent } from './registration/registration.component';
 import { CallerInformationGuard } from './guards/callerInformation.guard';
 import { AuthGuard } from './guards/authentication.guard';
-import { HomeComponent } from './home/home.component';
+import { CouponComponent } from './pages/coupon/coupon/coupon.component';
+import { LoginComponent } from './pages/login/login.component';
+import { HomeComponent } from './pages/home/home.component';
+import { RegistrationComponent } from './pages/registration/registration.component';
+import { ProductComponent } from './pages/product/product.component';
 export const CAN_ACTIVATE_GUARDS: any[] =
   [
     AuthGuard,
@@ -17,6 +18,7 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'home', component: HomeComponent }, 
   { path: 'register', component: RegistrationComponent }, 
+  { path: 'product', component: ProductComponent }, 
 ];
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

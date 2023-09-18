@@ -12,17 +12,17 @@ export class ApiService {
   constructor(private http: HttpClient,
     private cookieService: CookieService) { }
 
-  sendRequest<T = any>(apiUrl: string, method: HttpMethod, body?: any): Observable<T> {
+  sendRequest<T = any>(apiUrl: string, method: HttpMethod, body?: any, httpHeaders?: HttpHeaders): Observable<T> {
     let token = this.cookieService.get(this.tokenKey);
-
-    let response: Observable<T>;
     let headers: HttpHeaders;
+    let response: Observable<T>;
+    if (httpHeaders == null || httpHeaders == undefined)
+      headers = new HttpHeaders();
+    else
+      headers = httpHeaders;
+
     if (token) {
-      headers = new HttpHeaders({
-        'Authorization': `Bearer ${token}`
-      });
-    } else {
-      headers = new HttpHeaders({});
+      headers = headers.append('Authorization', `Bearer ${token}`);
     }
     switch (method) {
       case HttpMethod.GET:
