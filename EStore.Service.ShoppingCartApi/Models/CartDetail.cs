@@ -5,10 +5,10 @@ using EStore.Service.ShoppingCartApi.Models.Dto;
 
 namespace EStore.Service.ShoppingCartApi.Models
 {
-	public class CartDetails
+	public class CartDetail
 	{
 		[Key]
-		public int CartDetailsId { get; set; }
+		public int CartDetailId { get; set; }
 		public int CartHeaderId { get; set; }
 		[ForeignKey("CartHeaderId")]
 		public CartHeader CartHeader { get; set; }
