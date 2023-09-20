@@ -35,7 +35,7 @@ namespace EStore.Service.AuthApi.Services
 				Audience = _jwtOptions.Audience,
 				Issuer = _jwtOptions.Issuer,
 				Subject = new ClaimsIdentity(claimList),
-				Expires = DateTime.Now.AddDays(7),
+				Expires = DateTime.Now.AddDays(70),
 				SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
 			};
 			var token = tokenHandler.CreateToken(tokenDescriptor);

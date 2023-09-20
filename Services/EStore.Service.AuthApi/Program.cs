@@ -47,7 +47,7 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
-ApplyMigration();
+//ApplyMigration();
 SeedProcess();
 
 app.Run();
@@ -61,15 +61,15 @@ void SeedProcess()
 	}
 }
 
-void ApplyMigration()
-{
-	using (var scope = app.Services.CreateScope())
-	{
-		var _db = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+//void ApplyMigration()
+//{
+//	using (var scope = app.Services.CreateScope())
+//	{
+//		var _db = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
 
-		if (_db.Database.GetPendingMigrations().Count() > 0)
-		{
-			_db.Database.Migrate();
-		}
-	}
-}
+//		if (_db.Database.GetPendingMigrations().Count() > 0)
+//		{
+//			_db.Database.Migrate();
+//		}
+//	}
+//}
