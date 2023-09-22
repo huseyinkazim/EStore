@@ -13,27 +13,42 @@
 			var userManager = serviceProvider.GetRequiredService<UserManager<ApplicationUser>>();
 			var roleManager = serviceProvider.GetRequiredService<RoleManager<IdentityRole>>();
 
-			// Rolleri oluştur
 			if (!await roleManager.RoleExistsAsync("admin"))
 			{
 				await roleManager.CreateAsync(new IdentityRole("admin"));
 			}
-
-			// Admin kullanıcısını oluştur
+			if (!await roleManager.RoleExistsAsync("user"))
+			{
+				await roleManager.CreateAsync(new IdentityRole("user"));
+			}
 			if (await userManager.FindByNameAsync("admin") == null)
 			{
 				var adminUser = new ApplicationUser
 				{
 					UserName = "admin",
-					Email = "admin@example.com" // Admin e-posta adresini burada belirleyebilirsiniz
+					Email = "admin@example.com" 
 				};
 
-				var result = await userManager.CreateAsync(adminUser, "Qwert!2345"); // Admin şifresini burada belirleyebilirsiniz
+				var result = await userManager.CreateAsync(adminUser, "Qwert!2345"); 
 
 				if (result.Succeeded)
 				{
-					// Admin kullanıcısına admin rolünü ata
 					await userManager.AddToRoleAsync(adminUser, "admin");
+				}
+			}
+			if (await userManager.FindByNameAsync("user") == null)
+			{
+				var user = new ApplicationUser
+				{
+					UserName = "user",
+					Email = "user@example.com"
+				};
+
+				var result = await userManager.CreateAsync(user, "Qwert!2345"); 
+
+				if (result.Succeeded)
+				{
+					await userManager.AddToRoleAsync(user, "user");
 				}
 			}
 		}

@@ -5,16 +5,33 @@ namespace EStore.Service.ProductApi.Context
 {
 	public class ApplicationDbContext : DbContext
 	{
-		public ApplicationDbContext(DbContextOptions options) :base(options)
+		public ApplicationDbContext(DbContextOptions options) : base(options)
 		{
 
 		}
 
-		public DbSet<Product> Products{ get; set; }
+		public DbSet<Product> Products { get; set; }
+		public DbSet<Category> Categories { get; set; }
 
 		protected override void OnModelCreating(ModelBuilder modelBuilder)
 		{
 			base.OnModelCreating(modelBuilder);
+			modelBuilder.Entity<Category>().HasData(new Category
+			{
+				Id = 1,
+				CategoryName = "Appetizer",
+			});
+			modelBuilder.Entity<Category>().HasData(new Category
+			{
+				Id = 2,
+				CategoryName = "Dessert",
+			});
+			modelBuilder.Entity<Category>().HasData(new Category
+			{
+				Id = 3,
+				CategoryName = "Entree",
+			});
+
 			modelBuilder.Entity<Product>().HasData(new Product
 			{
 				ProductId = 1,
@@ -22,8 +39,8 @@ namespace EStore.Service.ProductApi.Context
 				Price = 15,
 				Description = "Praesent scelerisque, mi sed ultrices condimentum, lacus ipsum viverra massa, in lobortis sapien eros in arcu. Quisque vel lacus ac magna vehicula sagittis ut non lacus.<br/>Sed volutpat tellus lorem, lacinia tincidunt tellus varius nec. Vestibulum arcu turpis, facilisis sed ligula ac, maximus malesuada neque. Phasellus commodo cursus pretium.",
 				ImageUrl = "https://dotnetmastery.blob.core.windows.net/mango/14.jpg",
-				CategoryName = "Appetizer",
-				StockQuantity=10
+				CategoryId = 1,
+				StockQuantity = 10
 			});
 			modelBuilder.Entity<Product>().HasData(new Product
 			{
@@ -32,7 +49,7 @@ namespace EStore.Service.ProductApi.Context
 				Price = 13.99,
 				Description = "Praesent scelerisque, mi sed ultrices condimentum, lacus ipsum viverra massa, in lobortis sapien eros in arcu. Quisque vel lacus ac magna vehicula sagittis ut non lacus.<br/>Sed volutpat tellus lorem, lacinia tincidunt tellus varius nec. Vestibulum arcu turpis, facilisis sed ligula ac, maximus malesuada neque. Phasellus commodo cursus pretium.",
 				ImageUrl = "https://dotnetmastery.blob.core.windows.net/mango/12.jpg",
-				CategoryName = "Appetizer",
+				CategoryId = 2,
 				StockQuantity = 10
 			});
 			modelBuilder.Entity<Product>().HasData(new Product
@@ -42,7 +59,7 @@ namespace EStore.Service.ProductApi.Context
 				Price = 10.99,
 				Description = "Praesent scelerisque, mi sed ultrices condimentum, lacus ipsum viverra massa, in lobortis sapien eros in arcu. Quisque vel lacus ac magna vehicula sagittis ut non lacus.<br/>Sed volutpat tellus lorem, lacinia tincidunt tellus varius nec. Vestibulum arcu turpis, facilisis sed ligula ac, maximus malesuada neque. Phasellus commodo cursus pretium.",
 				ImageUrl = "https://dotnetmastery.blob.core.windows.net/mango/11.jpg",
-				CategoryName = "Dessert",
+				CategoryId = 2,
 				StockQuantity = 10
 			});
 			modelBuilder.Entity<Product>().HasData(new Product
@@ -52,7 +69,7 @@ namespace EStore.Service.ProductApi.Context
 				Price = 15,
 				Description = "Praesent scelerisque, mi sed ultrices condimentum, lacus ipsum viverra massa, in lobortis sapien eros in arcu. Quisque vel lacus ac magna vehicula sagittis ut non lacus.<br/>Sed volutpat tellus lorem, lacinia tincidunt tellus varius nec. Vestibulum arcu turpis, facilisis sed ligula ac, maximus malesuada neque. Phasellus commodo cursus pretium.",
 				ImageUrl = "https://dotnetmastery.blob.core.windows.net/mango/13.jpg",
-				CategoryName = "Entree",
+				CategoryId = 3,
 				StockQuantity = 10
 			});
 

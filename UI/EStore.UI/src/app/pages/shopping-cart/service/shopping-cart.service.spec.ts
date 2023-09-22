@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { JwtdecoderService } from './jwtdecoder.service';
+import { ShoppingCartService } from './shopping-cart.service';
 
-describe('JwtdecoderService', () => {
-  let service: JwtdecoderService;
+describe('ShoppingCartService', () => {
+  let service: ShoppingCartService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(JwtdecoderService);
+    service = TestBed.inject(ShoppingCartService);
   });
 
   it('should be created', () => {

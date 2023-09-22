@@ -1,24 +1,295 @@
-
 .img-container {
-    max-width: 100%;
-    max-height: 200px; 
-    overflow: hidden; 
-  }
-  
-  /* Resmi ortala */
-  .img-container img {
-    width: 100%;
-    height: auto;
-    display: block;
-    margin: 0 auto;
-  }
-  
+  max-width: 100%;
+  max-height: 200px;
+  overflow: hidden;
+}
+
+/* Resmi ortala */
+.img-container img {
+  width: 100%;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+}
+
 .button-group {
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-  }
-  
-  .button-group button {
-    margin-right: 5px;
-  }
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.button-group button {
+  margin-right: 5px;
+}
+
+#wrapper>.content {
+  z-index: 2;
+  float: left;
+  margin-top: 16px;
+}
+
+.content {
+  position: relative;
+  width: 100%;
+}
+
+.container {
+  position: relative;
+  width: 1188px;
+  margin: 0 auto 0;
+}
+
+[id=contentListing] .breadcrumb {
+  line-height: 18px;
+  height: 18px;
+  margin-bottom: 12px;
+}
+
+[id=contentListing] .breadcrumb ul {
+  float: none;
+  display: flex;
+}
+
+ol,
+ul {
+  list-style: none;
+}
+
+[id=contentListing] .breadcrumb ul a {
+  float: none;
+  color: grey;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.breadcrumb ul li {
+  float: left;
+  color: grey;
+}
+
+[id=contentListing] .breadcrumb .bcSep {
+  display: inline-block;
+  vertical-align: middle;
+  float: none;
+  margin: 0;
+  width: 18px;
+  height: 18px;
+}
+
+[id=contentListing] .breadcrumb .bcSep:before {
+  content: '';
+  display: block;
+  margin: 0 2px;
+  background-image: url("data:image/svg+xml;charset=utf8,%3Csvg width='18' height='18' viewBox='0 0 18 18' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cpath d='M0 0h18v18H0z'/%3E%3Cpath d='M7.813 4.504a.75.75 0 0 0-1.123.99l.062.07L10.19 9l-3.437 3.427a.75.75 0 0 0-.062.99l.062.071a.75.75 0 0 0 .99.063l.07-.063L11.78 9.53a.75.75 0 0 0 .063-.99l-.063-.07-3.967-3.966z' fill='%23707070'/%3E%3C/g%3E%3C/svg%3E");
+  width: 18px;
+  height: 18px;
+  position: relative;
+  left: auto;
+  top: auto;
+  background-position: unset;
+}
+
+
+.filterArea {
+  position: sticky;
+  top: 0;
+  height: calc(100vh - 177.2px);
+  overflow-y: auto;
+  padding-right: 15px;
+  /* Sağa kayan kaydırma çubuğu için gereklidir */
+}
+
+.filter {
+  border-bottom: solid 1px #ededed;
+  padding: 16px 0;
+}
+
+.filter h2 {
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: -0.05px;
+  color: #1f1f1f;
+  margin-bottom: 10px;
+  cursor: pointer;
+  user-select: none;
+  position: relative;
+}
+
+.filter h2:after {
+  background-image: url("data:image/svg+xml;charset=utf8,%3Csvg width='18' height='18' viewBox='0 0 18 18' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cpath d='M0 0h18v18H0z'/%3E%3Cpath d='M13.48 10.514a.75.75 0 0 1-.99 1.123l-.07-.063L9 8.186l-3.412 3.388a.75.75 0 0 1-.99.063l-.07-.063a.75.75 0 0 1-.063-.99l.062-.07 3.943-3.92a.75.75 0 0 1 .99-.062l.07.063 3.95 3.919z' fill='%23707070'/%3E%3C/g%3E%3C/svg%3E");
+  width: 18px;
+  height: 18px;
+  content: '';
+  display: block;
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
+a {
+  color: #202020;
+  display: block;
+  text-decoration: none;
+}
+
+.sorting-container {
+  display: flex;
+  justify-content: flex-end;
+  /* Sağa yaslanacak şekilde ayarlayın */
+  margin-bottom: 20px;
+  /* İhtiyaca göre ayarlayın */
+}
+
+.custom-select select {
+  padding: 8px 12px;
+  font-size: 14px;
+  border: 1px solid #ededed;
+  border-radius: 4px;
+  outline: none;
+  cursor: pointer;
+}
+
+.productArea {
+  width: 980px;
+}
+
+#contentListing .listingHolder,
+#sellerProductsTab .listingHolder {
+  padding-top: 5px;
+  display: flex;
+  box-sizing: border-box;
+  align-items: flex-start;
+}
+
+
+.product-row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin: 20px 0;
+}
+
+
+.product-image {
+  position: relative;
+}
+
+.product-image img {
+  max-width: 100%;
+}
+
+
+
+.cargoBadgeField {
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+}
+
+.product-name {
+  font-size: 16px;
+  margin: 10px 0;
+}
+
+.product-rating {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.rating {
+  width: 16px;
+  height: 16px;
+  background: url('/assets/images/rating.png') no-repeat;
+  background-size: 16px 16px;
+  margin-right: 5px;
+}
+
+
+
+/* İhtiyaca göre diğer stillemeleri ekleyebilirsiniz. */
+.product-card {
+  width: calc(33.33% - 20px);
+  border: 1px solid #ededed;
+  padding: 10px;
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 600px;
+}
+
+.product-price {
+  font-size: 18px;
+  font-weight: bold;
+  margin-top: auto;
+}
+
+.btnBasket {
+  display: inline-block;
+  background: #007bff;
+  color: #fff;
+  font-size: 24px;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  text-align: center;
+}
+.followBtn {
+  background: #fff;
+  box-shadow: 0 1px 2px rgba(0,0,0,.25);
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: block;
+  z-index: 2;
+  margin: 0;
+  top: 8px;
+  right: 8px;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: #fff;
+  padding: 5px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+.followBtn:after {
+  content: "";
+  display: block;
+  width: 23.33px;
+  height: 21px;
+  background-image: url("data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPHN2ZyBmaWxsPSJub25lIiB2aWV3Qm94PSIwIDAgMjQgMjIiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxwYXRoIGQ9Im0xNi45NjYgMC41MDYyNGMtMS44ODc1IDAuMDgyOS0zLjY5NCAwLjk4NjMtNC45MTA1IDIuMzcwMWwtMC4wNTcgMC4wNjU0OC0wLjA1NDktMC4wNjUxOWMtMS4yNzc2LTEuNDUyOS0zLjIwNjEtMi4zNzY2LTUuMTk0LTIuMzc2Ni0zLjYyMDQgMC02LjQxNjcgMi43ODU1LTYuNDE2NyA2LjQxNjcgMCAxLjE2MDcgMC4yOTA5MiAyLjI3NzkgMC44NjEzNCAzLjQwMTcgMC43MDc2NCAxLjM5NDIgMS44MDQ3IDIuNzY1NSAzLjU4NzIgNC41ODY4bDAuNjI3NCAwLjYyODggNS4xMjAzIDQuOTgzMyAwLjY0MjYgMC42MzgyYzAuNDU2MyAwLjQ1OTMgMS4xOTkyIDAuNDU5MyAxLjY1NTUgMGwyLjE3MDQtMi4xMzE0IDMuODc3Ni0zLjc3MmMxLjk4NjMtMS45OTY5IDMuMTc3Ny0zLjQ1MjMgMy45Mjk2LTQuOTMzNyAwLjU3MDQtMS4xMjM5IDAuODYxMy0yLjI0MSAwLjg2MTMtMy40MDE3IDAtMy42MzEyLTIuNzk2My02LjQxNjctNi40MTY3LTYuNDE2N2wtMC4yODM2IDAuMDA2MjM5em0wLjI4MzYgMi4zMjcxYzIuMzMzOCAwIDQuMDgzNCAxLjc0MjggNC4wODM0IDQuMDgzMyAwIDAuNzc2NTYtMC4xOTc4IDEuNTM2Mi0wLjYwODcgMi4zNDU3LTAuNDY5NyAwLjkyNTQ1LTEuMjAxMSAxLjkwMTgtMi4zMzY0IDMuMTMxNGwtMC41NTMyIDAuNTg2MmMtMC4wOTcxIDAuMTAwOS0wLjE5NjggMC4yMDM2LTAuMjk5IDAuMzA4bC0wLjc3MzYgMC43NzA1LTMuNzY5OSAzLjY2MTYtMC45OTI2IDAuOTY5NS01LjIyMTQtNS4wODNjLTAuMjE0OTYtMC4yMTYxLTAuNDE5MzMtMC40MjQ3LTAuNjEzNjItMC42MjY2bC0wLjU1MzE2LTAuNTg2MmMtMS4xMzUzLTEuMjI5Ni0xLjg2NjctMi4yMDU5LTIuMzM2NC0zLjEzMTQtMC40MTA4Ny0wLjgwOTUyLTAuNjA4NjctMS41NjkxLTAuNjA4NjctMi4zNDU3IDAtMi4zNDA1IDEuNzQ5Ni00LjA4MzMgNC4wODMzLTQuMDgzMyAxLjc5MTQgMCAzLjU1MjQgMS4xNzg2IDQuMTYxOSAyLjc1NDIgMC4zODQ3IDAuOTk0MzQgMS43OTE2IDAuOTk0MzQgMi4xNzYyIDAgMC42MDk5LTEuNTc2NCAyLjM2OTEtMi43NTQyIDQuMTYxOS0yLjc1NDJ6IiBjbGlwLXJ1bGU9ImV2ZW5vZGQiIGZpbGw9IiM0RjRGNEYiIGZpbGwtcnVsZT0iZXZlbm9kZCIvPgo8L3N2Zz4K");
+  background-size: cover;
+  background-repeat: no-repeat;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+}
+.cargoBadgeField {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  padding: 4px 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.cargoBadgeField .cargoBadgeBg {
+  background-color: #fff; /* Beyaz arka plan */
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  left: 0;
+  opacity: .4;
+}
+
+.cargoBadgeField .cargoBadgeText {
+  font-size: 13px;
+  font-weight: 800;
+  line-height: 1.54;
+  color: #007bff; /* Mavi renk */
+}

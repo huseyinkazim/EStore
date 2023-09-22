@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { JwtdecoderService } from 'src/app/service/jwtdecoder.service';
+import { AuthService } from 'src/app/service/auth.service';
 
 @Component({
   selector: 'app-home',
@@ -7,9 +7,9 @@ import { JwtdecoderService } from 'src/app/service/jwtdecoder.service';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent {
-  constructor(private jwtservice: JwtdecoderService) {
+  constructor(private authService: AuthService) {
 
-    console.log(jwtservice.getTokenInfo());
+    console.log(authService.getTokenInfo());
   }
 
 }

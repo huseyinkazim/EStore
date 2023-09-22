@@ -4,5 +4,7 @@ export class ProductDto {
     price: number;
     description: string;
     categoryName: string;
-    imageUrl: string; 
+    imageUrl: string;
+    quantity: number;
+    rating: number;
 }

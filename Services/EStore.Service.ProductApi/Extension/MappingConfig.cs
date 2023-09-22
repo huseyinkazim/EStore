@@ -11,6 +11,7 @@ namespace EStore.Service.ProductApi.Extension
 			var mappingConfig = new MapperConfiguration(config =>
 			{
 				config.CreateMap<ProductDto, Product>().ReverseMap();
+				config.CreateMap<CategoryDto, Category>().ReverseMap();
 			});
 			return mappingConfig;
 		}

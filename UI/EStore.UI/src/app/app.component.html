@@ -34,7 +34,7 @@
                         aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
                     </button>
-                    <ng-container *ngIf="isLoggedIn(); else loginLink">
+                    <ng-container *ngIf="isAdmin; else userLink">
                         <div
                             class="navbar-collapse collapse d-sm-inline-flex">
 
@@ -52,7 +52,8 @@
                                 </li>
                             </ul>
                             <div class="navbar-nav ml-auto">
-                                <a class="nav-link"> Hello {{getUserName()}} </a>
+                                <a class="nav-link"> Hello {{getUserName()}}
+                                </a>
                                 <a class="nav-link" [routerLink]="['/cart']">
                                     My Cart <i class="fas fa-shopping-cart"></i>
                                 </a>
@@ -60,15 +61,61 @@
                             </div>
                         </div>
                     </ng-container>
+                    <ng-template #userLink>
+                        <ng-container *ngIf="isUser; else loginLink">
+                            <div
+                                class="navbar-collapse collapse d-sm-inline-flex">
+
+                                <ul class="navbar-nav flex-grow-1">
+                                    <li class="nav-item pt-lg-1">
+                                        <a class="nav-link"
+                                            [routerLink]="['/home']">Home</a>
+                                    </li>
+                                    <li class="nav-item pt-lg-1">
+                                        <a class="nav-link"
+                                            [routerLink]="['/product']">Product</a>
+                                    </li>
+                                </ul>
+                                <div class="navbar-nav ml-auto">
+                                    <a class="nav-link"> Hello {{getUserName()}}
+                                    </a>
+                                    <a class="nav-link" [routerLink]="['/cart']">
+                                        My Cart <i class="fas fa-shopping-cart"></i>
+                                    </a>
+                                    <a class="nav-link" (click)="logout()">Logout</a>
+                                </div>
+                            </div>
+                        </ng-container>
+                    </ng-template>
                     <ng-template #loginLink>
                         <div
+                            class="navbar-collapse collapse d-sm-inline-flex">
+                            <ul class="navbar-nav flex-grow-1">
+                                <li class="nav-item pt-lg-1">
+                                    <a class="nav-link"
+                                        [routerLink]="['/product']">Product</a>
+                                </li>
+                            </ul>
+                            <div class="navbar-nav ml-auto">
+                                <div class="navbar-nav ml-auto">
+                                    <a class="nav-link" [routerLink]="['/cart']">
+                                        My Cart <i class="fas fa-shopping-cart"></i>
+                                    </a>
+                                    <a class="nav-link"
+                                        (click)="redirectToLogin()">Login</a>
+                                    <a class="nav-link"
+                                        (click)="redirectToRegister()">Register</a>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- <div
                             class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
                             <div class="navbar-nav ml-auto">
                                 <a class="nav-link" (click)="redirectToLogin()">Login</a>
                                 <a class="nav-link"
                                     (click)="redirectToRegister()">Register</a>
                             </div>
-                        </div>
+                        </div> -->
                     </ng-template>
                 </div>
             </nav>

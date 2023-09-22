@@ -1,4 +1,4 @@
-<div class="container mt-5">
+<div class="container mt-5" *ngIf="isLoggedIn && isAdmin else userTemplate">
   <!-- Ürün Oluşturma Formu -->
   <div class="mb-3">
     <button class="btn btn-primary" (click)="showCreateForm()">Yeni Ürün Ekle</button>
@@ -18,8 +18,10 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let product of products" [class.selected]="product === selectedProduct">
-          <td><a [routerLink]="['/product', product.productId]">{{ product.name }}</a></td>
+        <tr *ngFor="let product of products"
+          [class.selected]="product === selectedProduct">
+          <td><a [routerLink]="['/product', product.productId]">{{ product.name
+              }}</a></td>
           <td>{{ product.price }}</td>
           <td>{{ product.description }}</td>
           <td>{{ product.categoryName }}</td>
@@ -30,9 +32,12 @@
           </td>
           <td>
             <div class="button-group">
-              <button class="btn btn-primary btn-sm me-2" (click)="selectProduct(product)">Seç</button>
-              <button class="btn btn-warning btn-sm me-2" (click)="editProduct(product)">Düzenle</button>
-              <button class="btn btn-danger btn-sm" (click)="deleteProduct(product.productId)">Sil</button>
+              <button class="btn btn-primary btn-sm me-2"
+                (click)="selectProduct(product)">Seç</button>
+              <button class="btn btn-warning btn-sm me-2"
+                (click)="editProduct(product)">Düzenle</button>
+              <button class="btn btn-danger btn-sm"
+                (click)="deleteProduct(product.productId)">Sil</button>
             </div>
           </td>
         </tr>
@@ -118,3 +123,230 @@
     <p>Resim URL: {{ selectedProduct.imageUrl }}</p>
   </div>
 </div>
+<ng-template #userTemplate>
+  <div id="wrapper" class role="1000472">
+    <div class id="contentListing">
+      <div class="container ">
+        <div id="breadCrumb" class="breadcrumb true">
+          <ul class="clearfix">
+            <li>
+              <a href="https://www.n11.com/" title="Ana Sayfa">
+                Ana Sayfa
+              </a>
+            </li>
+            <li>
+              <span class="bcSep"></span>
+              <a href="https://www.n11.com/elektronik" title="Elektronik">
+                Elektronik
+              </a>
+            </li>
+            <li>
+              <span class="bcSep"></span>
+              <a href="https://www.n11.com/telefon-ve-aksesuarlari"
+                title="Telefon &amp; Aksesuarları" data-category-id="1.000.472"
+                data-category-name="Telefon &amp; Aksesuarları"
+                data-category-level="1">
+                Telefon &amp; Aksesuarları
+              </a>
+            </li>
+          </ul>
+        </div>
+        <div class="listingHolder">
+          <div class="filterArea"
+            style="height: calc(100vh - 177.2px); top: 0px;">
+            <section class="filter filterCategory acc open clickedFilter"
+              data-hdfl="cats">
+              <h2>Kategoriler</h2>
+              <div class="filterContent">
+                <ul class="filterList">
+                  <li class="filterItem">
+                    <a href="https://www.n11.com/elektronik" title="Elektronik">
+                      <span>Elektronik</span>
+                    </a>
+                    <ul class="filterList">
+                      <li class="filterItem parent">
+                        <a
+                          href="https://www.n11.com/telefon-ve-aksesuarlari?ipg=2"
+                          data-category-id="1000472"
+                          title="Telefon &amp; Aksesuarları"
+                          data-category-level="1">
+                          Telefon &amp; Aksesuarları
+                        </a>
+                        <ul class="filterList">
+                          <li class="filterItem ">
+                            <a
+                              href="https://www.n11.com/telefon-ve-aksesuarlari/cep-telefonu-aksesuarlari?ipg=2"
+                              data-category-id="1000477"
+                              title="Cep Telefonu Aksesuarları"
+                              data-category-level="2">
+                              Cep Telefonu Aksesuarları
+                            </a>
+                          </li>
+                        </ul>
+                        <ul class="filterList">
+                          <li class="filterItem ">
+                            <a
+                              href="https://www.n11.com/telefon-ve-aksesuarlari/cep-telefonu?ipg=2"
+                              data-category-id="1000476" title="Cep Telefonu"
+                              data-category-level="2">
+                              Cep Telefonu
+                            </a>
+                          </li>
+                        </ul>
+                        <ul class="filterList">
+                          <li class="filterItem ">
+                            <a
+                              href="https://www.n11.com/telefon-ve-aksesuarlari/giyilebilir-teknoloji?ipg=2"
+                              data-category-id="1000473"
+                              title="Giyilebilir Teknoloji"
+                              data-category-level="2">
+                              Giyilebilir Teknoloji
+                            </a>
+                          </li>
+                        </ul>
+                        <ul class="filterList">
+                          <li class="filterItem ">
+                            <a
+                              href="https://www.n11.com/telefon-ve-aksesuarlari/cep-telefonu-yedek-parca?ipg=2"
+                              data-category-id="1000496"
+                              title="Cep Telefonu Yedek Parça"
+                              data-category-level="2">
+                              Cep Telefonu Yedek Parça
+                            </a>
+                          </li>
+                        </ul>
+                        <ul class="filterList">
+                          <li class="filterItem ">
+                            <a
+                              href="https://www.n11.com/telefon-ve-aksesuarlari/tuslu-telefon?ipg=2"
+                              data-category-id="1089101" title="Tuşlu Telefon"
+                              data-category-level="2">
+                              Tuşlu Telefon
+                            </a>
+                          </li>
+                        </ul>
+                        <ul class="filterList">
+                          <li class="filterItem ">
+                            <a
+                              href="https://www.n11.com/telefon-ve-aksesuarlari/outlet-teshir-cep-telefonu?ipg=2"
+                              data-category-id="1215220"
+                              title="Outlet - Teşhir Cep Telefonu"
+                              data-category-level="2">
+                              Outlet - Teşhir Cep Telefonu
+                            </a>
+                          </li>
+                        </ul>
+                        <ul class="filterList">
+                          <li class="filterItem ">
+                            <a
+                              href="https://www.n11.com/telefon-ve-aksesuarlari/sim-kart-hat-paketler?ipg=2"
+                              data-category-id="1000502"
+                              title="Sim Kart, Hat, Paketler"
+                              data-category-level="2">
+                              Sim Kart, Hat, Paketler
+                            </a>
+                          </li>
+                        </ul>
+                        <ul class="filterList">
+                          <li class="filterItem ">
+                            <a
+                              href="https://www.n11.com/telefon-ve-aksesuarlari/telsiz-ve-masaustu-telefon?ipg=2"
+                              data-category-id="1000508"
+                              title="Telsiz &amp; Masaüstü Telefon"
+                              data-category-level="2">
+                              Telsiz &amp; Masaüstü Telefon
+                            </a>
+                          </li>
+                        </ul>
+                        <ul class="filterList">
+                          <li class="filterItem ">
+                            <a
+                              href="https://www.n11.com/telefon-ve-aksesuarlari/ikinci-el-telefonlar?ipg=2"
+                              data-category-id="1089100"
+                              title="Yenilenmiş Telefon &amp; Aksesuarları"
+                              data-category-level="2">
+                              Yenilenmiş Telefon &amp; Aksesuarları
+                            </a>
+                          </li>
+                        </ul>
+                      </li>
+                    </ul>
+                  </li>
+                </ul>
+              </div>
+            </section>
+          </div>
+          <div class="productArea">
+            <section
+              class="group listingGroup resultListGroup import-search-view  relaunchCardGroup ">
+              <div class="header">
+                <div class="listOptionHolder">
+                  <div class="resultView">
+                    <div class="resultText ">
+                      <h2>
+                        Telefon &amp; Aksesuarları
+                      </h2>
+                      için
+                      <strong>853.833</strong>
+                      sonuç bulundu.
+                    </div>
+                  </div>
+                  <div class="sorting-container">
+                    <div class="custom-select">
+                      <select [(ngModel)]="selectedSortOption"
+                        (change)="onSortOptionChange($event)">
+                        <option *ngFor="let option of sortOptions"
+                          [value]="option.value">{{ option.label }}</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div id="view" class="catalogView">
+                <div class="product-row">
+                  <div class="product-card" *ngFor="let product of products">
+                    <div class="product-image">
+                      <img [src]="product.imageUrl"
+                        alt="{{ product.name }} Resim">
+                      <span class="followBtn" title="Favorilere ekle"></span>
+                      <div class="cargoBadgeField">
+                        <span class="cargoBadgeBg"></span>
+                        <span class="cargoBadgeText">ÜCRETSİZ KARGO</span>
+                      </div>
+                    </div>
+                    <h3 class="product-name">{{ product.name }}</h3>
+                    <h3 class="product-description">{{ product.description }}</h3>
+                    <div class="product-rating">
+                      <span class="rating r{{ product.rating }}"></span>
+                      <span class="ratingText">({{ product.quantity }})</span>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-8">
+                        <!-- İçerik Burada -->
+                        <div class="product-price">
+                          <span
+                            class="oldPrice noLine cPoint priceEventClick hidden">{{
+                            product.price | currency: 'TRY' }}</span><br>
+                          <span class="newPrice cPoint priceEventClick"><ins>{{
+                              product.price | currency: 'TRY' }}</ins></span>
+                        </div>
+                      </div>
+                      <div class="col-md-3">
+                        <!-- İçerik Burada -->
+                        <span class="btnBasket" data-item-list-name
+                          data-search-keyword
+                          attr.data-category-name="{{ product.categoryName }}"
+                          attr.data-pid="{{ product.productId }}"
+                          attr.data-category-id="{{ product.categoryName}}">+</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </section>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-template>

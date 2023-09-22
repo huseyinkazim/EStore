@@ -1,15 +1,17 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ProductDto } from 'src/app/common/ProductDto';
 import { CouponDto } from '../coupon/model/coupondto';
 import { ProductService } from './service/product.service';
 import { ResponseDto } from 'src/app/common/responsedto';
+import { BaseComponent } from '../base/base/base.component';
+import { AuthService } from 'src/app/service/auth.service';
 
 @Component({
   selector: 'app-product',
   templateUrl: './product.component.html',
   styleUrls: ['./product.component.css']
 })
-export class ProductComponent {
+export class ProductComponent extends BaseComponent {
   products: ProductDto[] = [];
   showCreate: boolean = false;
   showEdit: boolean = false;
@@ -17,11 +19,99 @@ export class ProductComponent {
   selectedProduct: ProductDto = new ProductDto();
   newProduct: ProductDto = new ProductDto();
   editingProduct: ProductDto = new ProductDto();
-
-  constructor(private productService: ProductService) { }
+  selectedSortOption = 'NUMARA11'; // Varsayılan sıralama seçeneği
+  sortOptions = [
+    { value: 'NUMARA11', label: 'Akıllı Sıralama' },
+    { value: 'PRICE_LOW', label: 'Artan fiyat' },
+    { value: 'PRICE_HIGH', label: 'Azalan fiyat' },
+    { value: 'SALES_VOLUME', label: 'Satış miktarı' },
+    { value: 'REVIEWS', label: 'Yorum sayısı' },
+    { value: 'NEWEST', label: 'Yeni ürün' },
+    { value: 'REVIEW_RATE', label: 'Ürün Notu' },
+    { value: 'SELLER_GRADE', label: 'Mağaza Puanı' }
+  ];
+  constructor(private productService: ProductService,
+    protected override authService: AuthService) {
+    super(authService);
+  }
 
   ngOnInit(): void {
-    this.getProducts();
+
+    this.products = [
+      {
+        productId: 0,
+        name: "Solo Bambu Katkılı 40'lı Tuvalet Kağıdı",
+        description: "Çevre dostu tuvalet kağıdı.",
+        categoryName: "Temizlik",
+        imageUrl: "https://n11scdn.akamaized.net/a1/602_857/03/98/33/22/IMG-3428722542198131134.jpg",
+        price: 190.00,
+        quantity: 1,
+        rating: 3.0
+      },
+      {
+        productId: 0,
+        name: "Xiaomi Redmi Note 12 Pro",
+        description: "Xiaomi Redmi Note 12 Pro 8 GB 256 GB (Xiaomi Türkiye Garantili)",
+        categoryName: "Telefon",
+        imageUrl: "https://n11scdn.akamaized.net/a1/226_339/08/84/05/19/IMG-7386303242057276048.jpg",
+        price: 11899.00,
+        quantity: 3,
+        rating: 4.0
+      },
+      {
+        productId: 0,
+        name: "Xiaomi Redmi Note 12 Pro",
+        description: "Xiaomi Redmi Note 12 Pro 8 GB 256 GB (Xiaomi Türkiye Garantili)",
+        categoryName: "Telefon",
+        imageUrl: "https://n11scdn.akamaized.net/a1/226_339/08/84/05/19/IMG-7386303242057276048.jpg",
+        price: 11899.00,
+        quantity: 3,
+        rating: 5.0
+      },
+      {
+        productId: 0,
+        name: "Xiaomi Redmi Note 12 Pro",
+        description: "Xiaomi Redmi Note 12 Pro 8 GB 256 GB (Xiaomi Türkiye Garantili)",
+        categoryName: "Telefon",
+        imageUrl: "https://n11scdn.akamaized.net/a1/226_339/08/84/05/19/IMG-7386303242057276048.jpg",
+        price: 11899.00,
+        quantity: 3,
+        rating: 3.5
+      },
+      {
+        productId: 0,
+        name: "Xiaomi Redmi Note 12 Pro",
+        description: "Xiaomi Redmi Note 12 Pro 8 GB 256 GB (Xiaomi Türkiye Garantili)",
+        categoryName: "Telefon",
+        imageUrl: "https://n11scdn.akamaized.net/a1/226_339/08/84/05/19/IMG-7386303242057276048.jpg",
+        price: 11899.00,
+        quantity: 3,
+        rating: 2.8
+
+      },
+      {
+        productId: 0,
+        name: "Samsung Galaxy A04E",
+        description: "Samsung Galaxy A04E 4 GB 128 GB (Samsung Türkiye Garantili)",
+        categoryName: "Telefon",
+        imageUrl: "https://n11scdn.akamaized.net/a1/226_339/01/40/24/33/IMG-1826629388239884520.jpg",
+        price: 4999,
+        quantity: 3,
+        rating: 3.0
+      },
+      {
+        productId: 0,
+        name: "Reeder S19 Max Pro",
+        description: "Reeder S19 Max Pro 6 GB 256 GB (Reeder Türkiye Garantili)",
+        categoryName: "Telefon",
+        imageUrl: "https://n11scdn.akamaized.net/a1/226_339/01/81/34/55/IMG-2812823934010575074.jpg",
+        price: 4041.00 ,
+        quantity: 3,
+        rating: 1.0
+      }
+    ];
+
+    // this.getProducts();
   }
 
   getProducts(): void {
@@ -49,7 +139,9 @@ export class ProductComponent {
             price: 0,
             description: '',
             categoryName: '',
-            imageUrl: ''
+            imageUrl: '',
+            quantity: 0,
+            rating: 0
           };
         }
       },
@@ -95,7 +187,9 @@ export class ProductComponent {
       price: 0,
       description: '',
       categoryName: '',
-      imageUrl: ''
+      imageUrl: '',
+      quantity: 0,
+      rating:0
     };
   }
 
@@ -107,7 +201,9 @@ export class ProductComponent {
       price: 0,
       description: '',
       categoryName: '',
-      imageUrl: ''
+      imageUrl: '',
+      quantity: 0,
+      rating:0
     };
   }
 
@@ -121,6 +217,12 @@ export class ProductComponent {
     this.showEdit = false;
     this.showDetails = false;
 
+  }
+
+
+  onSortOptionChange(event: any) {
+    this.selectedSortOption = event.target.value;
+    // Burada sıralama seçeneği değiştiğinde yapılacak işlemleri ekleyebilirsiniz.
   }
 }
 

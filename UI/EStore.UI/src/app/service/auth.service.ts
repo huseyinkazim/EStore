@@ -13,6 +13,8 @@ import { CookieService } from 'ngx-cookie-service';
 import { ApiService } from './api.service';
 import { ResponseDto } from '../common/responsedto';
 import { ObjectUtil } from '../common/Extension';
+import { TokenInfo } from '../common/TokenInfo';
+import jwt_decode from 'jwt-decode';
 
 @Injectable({
   providedIn: 'root'
@@ -104,5 +106,21 @@ export class AuthService {
   removeToken(): void {
     this.cookieService.delete(this.tokenKey);
   }
-  
+  getTokenInfo(): TokenInfo {
+    // Token'i çözümle
+    var info = new TokenInfo();
+
+    if (this.isUserLoggedIn()) {
+      const token = this.getToken();
+      if (ObjectUtil.isNullOrUndefinedOrEmpty) {
+        const decodedToken: any = jwt_decode(token);
+        // Örnek claimlere erişim
+        info.email = decodedToken.email;
+        info.userId = decodedToken.sub;
+        info.userName = decodedToken.name;
+        info.roles = decodedToken.role; // Eğer rolleri almak istiyorsanız
+      }
+    }
+    return info;
+  }
 }

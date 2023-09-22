@@ -26,6 +26,7 @@ namespace EStore.Service.ProductApi.Controllers
 
 		[HttpGet]
 		public ResponseDto Get()
+
 		{
 			try
 			{
