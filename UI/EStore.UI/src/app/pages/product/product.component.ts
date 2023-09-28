@@ -7,6 +7,7 @@ import { BaseComponent } from '../base/base/base.component';
 import { AuthService } from 'src/app/service/auth.service';
 import { CategoryService } from 'src/app/service/category.service';
 import { Category } from 'src/app/common/Category';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-product',
@@ -19,11 +20,12 @@ export class ProductComponent extends BaseComponent {
   showCreate: boolean = false;
   showEdit: boolean = false;
   showDetails: boolean = false;
+  categoryId: number;
   selectedProduct: ProductDto = new ProductDto();
   selectedCategory: Category = new Category();
   newProduct: ProductDto = new ProductDto();
   editingProduct: ProductDto = new ProductDto();
-  isCategoryOpen = true; 
+  isCategoryOpen = true;
   selectedSortOption = 'NUMARA11'; // Varsayılan sıralama seçeneği
   sortOptions = [
     { value: 'NUMARA11', label: 'Akıllı Sıralama' },
@@ -37,89 +39,37 @@ export class ProductComponent extends BaseComponent {
   ];
   constructor(private productService: ProductService,
     private categoryService: CategoryService,
-    protected override authService: AuthService) {
+    protected override authService: AuthService,
+    private route: ActivatedRoute) {
     super(authService);
   }
 
   ngOnInit(): void {
-    this.getCategoryMap();
-    this.products = [
-      {
-        productId: 0,
-        name: "Solo Bambu Katkılı 40'lı Tuvalet Kağıdı",
-        description: "Çevre dostu tuvalet kağıdı.",
-        categoryName: "Temizlik",
-        imageUrl: "https://n11scdn.akamaized.net/a1/602_857/03/98/33/22/IMG-3428722542198131134.jpg",
-        price: 190.00,
-        quantity: 1,
-        rating: 3.0
-      },
-      {
-        productId: 0,
-        name: "Xiaomi Redmi Note 12 Pro",
-        description: "Xiaomi Redmi Note 12 Pro 8 GB 256 GB (Xiaomi Türkiye Garantili)",
-        categoryName: "Telefon",
-        imageUrl: "https://n11scdn.akamaized.net/a1/226_339/08/84/05/19/IMG-7386303242057276048.jpg",
-        price: 11899.00,
-        quantity: 3,
-        rating: 4.0
-      },
-      {
-        productId: 0,
-        name: "Xiaomi Redmi Note 12 Pro",
-        description: "Xiaomi Redmi Note 12 Pro 8 GB 256 GB (Xiaomi Türkiye Garantili)",
-        categoryName: "Telefon",
-        imageUrl: "https://n11scdn.akamaized.net/a1/226_339/08/84/05/19/IMG-7386303242057276048.jpg",
-        price: 11899.00,
-        quantity: 3,
-        rating: 5.0
-      },
-      {
-        productId: 0,
-        name: "Xiaomi Redmi Note 12 Pro",
-        description: "Xiaomi Redmi Note 12 Pro 8 GB 256 GB (Xiaomi Türkiye Garantili)",
-        categoryName: "Telefon",
-        imageUrl: "https://n11scdn.akamaized.net/a1/226_339/08/84/05/19/IMG-7386303242057276048.jpg",
-        price: 11899.00,
-        quantity: 3,
-        rating: 3.5
-      },
-      {
-        productId: 0,
-        name: "Xiaomi Redmi Note 12 Pro",
-        description: "Xiaomi Redmi Note 12 Pro 8 GB 256 GB (Xiaomi Türkiye Garantili)",
-        categoryName: "Telefon",
-        imageUrl: "https://n11scdn.akamaized.net/a1/226_339/08/84/05/19/IMG-7386303242057276048.jpg",
-        price: 11899.00,
-        quantity: 3,
-        rating: 2.8
-
-      },
-      {
-        productId: 0,
-        name: "Samsung Galaxy A04E",
-        description: "Samsung Galaxy A04E 4 GB 128 GB (Samsung Türkiye Garantili)",
-        categoryName: "Telefon",
-        imageUrl: "https://n11scdn.akamaized.net/a1/226_339/01/40/24/33/IMG-1826629388239884520.jpg",
-        price: 4999,
-        quantity: 3,
-        rating: 3.0
-      },
-      {
-        productId: 0,
-        name: "Reeder S19 Max Pro",
-        description: "Reeder S19 Max Pro 6 GB 256 GB (Reeder Türkiye Garantili)",
-        categoryName: "Telefon",
-        imageUrl: "https://n11scdn.akamaized.net/a1/226_339/01/81/34/55/IMG-2812823934010575074.jpg",
-        price: 4041.00,
-        quantity: 3,
-        rating: 1.0
+    this.route.queryParams
+      .subscribe(params => {
+        console.log(params); // { orderby: "price" }
+        this.categoryId = params["categoryId"];
+        console.log(this.categoryId); // price
+        this.getCategoryMap();
+        let productObjects: any;
+        let productString = '{"isSuccess":true,"result":[{"productId":1,"name":"Samosa","price":15,"description":"Praesent scelerisque, mi sed ultrices condimentum, lacus ipsum viverra massa, in lobortis sapien eros in arcu. Quisque vel lacus ac magna vehicula sagittis ut non lacus.<br/>Sed volutpat tellus lorem, lacinia tincidunt tellus varius nec. Vestibulum arcu turpis, facilisis sed ligula ac, maximus malesuada neque. Phasellus commodo cursus pretium.","categoryName":null,"imageUrl":"assets/images/14.jpg","quantity":10,"categoryId":7,"category":null},{"productId":2,"name":"Paneer Tikka","price":13.99,"description":"Praesent scelerisque, mi sed ultrices condimentum, lacus ipsum viverra massa, in lobortis sapien eros in arcu. Quisque vel lacus ac magna vehicula sagittis ut non lacus.<br/>Sed volutpat tellus lorem, lacinia tincidunt tellus varius nec. Vestibulum arcu turpis, facilisis sed ligula ac, maximus malesuada neque. Phasellus commodo cursus pretium.","categoryName":null,"imageUrl":"assets/images/12.jpg","quantity":10,"categoryId":7,"category":null},{"productId":3,"name":"Sweet Pie","price":10.99,"description":"Praesent scelerisque, mi sed ultrices condimentum, lacus ipsum viverra massa, in lobortis sapien eros in arcu. Quisque vel lacus ac magna vehicula sagittis ut non lacus.<br/>Sed volutpat tellus lorem, lacinia tincidunt tellus varius nec. Vestibulum arcu turpis, facilisis sed ligula ac, maximus malesuada neque. Phasellus commodo cursus pretium.","categoryName":null,"imageUrl":"assets/images/11.jpg","quantity":10,"categoryId":6,"category":null},{"productId":4,"name":"Pav Bhaji","price":15,"description":"Praesent scelerisque, mi sed ultrices condimentum, lacus ipsum viverra massa, in lobortis sapien eros in arcu. Quisque vel lacus ac magna vehicula sagittis ut non lacus.<br/>Sed volutpat tellus lorem, lacinia tincidunt tellus varius nec. Vestibulum arcu turpis, facilisis sed ligula ac, maximus malesuada neque. Phasellus commodo cursus pretium.","categoryName":null,"imageUrl":"assets/images/13.jpg","quantity":10,"categoryId":3,"category":null},{"productId":5,"name":"Solo Bambu Katkılı 40lı Tuvalet Kağıdı","price":19,"description":"Çevre dostu tuvalet kağıdı.","categoryName":null,"imageUrl":"assets/images/Tuvalet Kağıdı.webp","quantity":10,"categoryId":8,"category":null},{"productId":6,"name":"Xiaomi Redmi Note 12 Pro","price":1900,"description":"Xiaomi Redmi Note 12 Pro 8 GB 256 GB(Xiaomi Türkiye Garantili)","categoryName":null,"imageUrl":"assets/images/Redmi Note 12 Pro.webp","quantity":10,"categoryId":5,"category":null},{"productId":7,"name":"Samsung Galaxy A04E","price":1700,"description":"Samsung Galaxy A04E 4 GB 128 GB(Samsung Türkiye Garantili)","categoryName":null,"imageUrl":"assets/images/Samsung Galaxy A04E.jpg","quantity":10,"categoryId":5,"category":null}],"displayMessage":"","errorMessage":null}';
+        productObjects = JSON.parse(productString);
+        console.log(productObjects);
+        this.products = productObjects.result;
       }
-    ];
+      );
 
     // this.getProducts();
   }
+  findSubcategoryIds(baseId: number, data: Category[]): number[] {
+    const result: number[] = [];
+    result.push(data.find(i => i.Id == baseId).Id);
+    for (const category of data.filter(i => i.BaseCategoryId == baseId)) {
+      result.push(...this.findSubcategoryIds(category.Id, data.filter(i => i.BaseCategoryId == baseId)));
+    }
 
+    return result;
+  }
   getCategories(): void {
     this.categoryService.getCategories().subscribe(
       (data: Category[]) => {
@@ -157,7 +107,8 @@ export class ProductComponent extends BaseComponent {
     let data: Category[] = [];
 
     data = JSON.parse(categoryString);
-
+    let categoryIds = this.findSubcategoryIds(this.categoryId, data);
+    console.log(categoryIds);
     // Initialize a map to store categories by their BaseCategoryId
     const categoryMap = new Map<number, Category[]>();
 
@@ -210,7 +161,9 @@ export class ProductComponent extends BaseComponent {
             categoryName: '',
             imageUrl: '',
             quantity: 0,
-            rating: 0
+            rating: 0,
+            category: null,
+            categoryId: 0
           };
         }
       },
@@ -258,7 +211,9 @@ export class ProductComponent extends BaseComponent {
       categoryName: '',
       imageUrl: '',
       quantity: 0,
-      rating: 0
+      rating: 0,
+      category: null,
+      categoryId: 0
     };
   }
 
@@ -272,7 +227,9 @@ export class ProductComponent extends BaseComponent {
       categoryName: '',
       imageUrl: '',
       quantity: 0,
-      rating: 0
+      rating: 0,
+      category: null,
+      categoryId: 0
     };
   }
 
@@ -287,7 +244,7 @@ export class ProductComponent extends BaseComponent {
     this.showDetails = false;
 
   }
- toggleCategory(): void {
+  toggleCategory(): void {
     this.isCategoryOpen = !this.isCategoryOpen;
   }
 

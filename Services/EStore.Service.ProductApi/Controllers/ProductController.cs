@@ -25,6 +25,7 @@ namespace EStore.Service.ProductApi.Controllers
 		}
 
 		[HttpGet]
+		[AllowAnonymous]
 		public ResponseDto Get()
 
 		{

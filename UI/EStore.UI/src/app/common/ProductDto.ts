@@ -1,3 +1,5 @@
+import { Category } from "./Category";
+
 export class ProductDto {
     productId: number;
     name: string;
@@ -7,4 +9,6 @@ export class ProductDto {
     imageUrl: string;
     quantity: number;
     rating: number;
+    categoryId: number;
+    category: Category;
 }

@@ -12,7 +12,7 @@ namespace EStore.Service.ProductApi.Context
 		public ApplicationDbContext(string connString)
 		{
 			
-					}
+		}
 		public DbSet<Product> Products { get; set; }
 		public DbSet<Category> Categories { get; set; }
 

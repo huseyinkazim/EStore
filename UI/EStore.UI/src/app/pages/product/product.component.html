@@ -155,31 +155,7 @@
           <div class="filterArea"
             style="height: calc(100vh - 177.2px); top: 0px;">
             <h4>Kategoriler</h4>
-
             <app-openablebuton [datas]="categories"></app-openablebuton>
-
-            <!-- <section class="filter filterCategory acc open clickedFilter"
-              data-hdfl="cats">
-             
-              <div class="filterContent">
-                <ul class="filterList">
-                  <li class="filterItem" *ngFor="let category of categories">
-                    <a [href]="category.link" [title]="category.CategoryName">
-                      <span>{{ category.CategoryName }}</span>
-                    </a>
-                    <ul class="filterList"
-                      *ngIf="category.subCategories && category.subCategories.length > 0">
-                      <li class="filterItem parent"
-                        *ngFor="let subcategory of category.subCategories">
-                        <a [href]="subcategory.link"
-                          [title]="subcategory.CategoryName">{{
-                          subcategory.CategoryName }}</a>
-                      </li>
-                    </ul>
-                  </li>
-                </ul>
-              </div>
-            </section> -->
           </div>
           <div class="productArea">
             <section

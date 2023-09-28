@@ -23,7 +23,9 @@ export class ShoppingCartComponent {
         imageUrl: "https://n11scdn.akamaized.net/a1/80/03/98/33/22/IMG-3428722542198131134.jpg",
         price: 190.00,
         quantity: 1,
-        rating:3.0
+        rating:3.0,
+        category:null,
+        categoryId: 0
       }
     ];
     this.shoppingCartService.getCart('12345').subscribe((data) => {
@@ -37,7 +39,9 @@ export class ShoppingCartComponent {
           imageUrl: "https://n11scdn.akamaized.net/a1/80/03/98/33/22/IMG-3428722542198131134.jpg",
           price: 190.00,
           quantity: 1,
-          rating:3.0
+          rating:3.0,
+          category:null,
+          categoryId : 0
         }
       ];
       console.log(data);
