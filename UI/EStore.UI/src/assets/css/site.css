@@ -64,12 +64,12 @@ html {
 body {
   /* Margin bottom by footer height */
   margin-bottom: 60px;
-  transform: scale(0.67);
+  transform: scale(1);
   transform-origin: 0 0;
 }
 
 .footer {
-  position: fixed;
+  position: relative;
   bottom: 0;
   width: 100%;
   white-space: nowrap;

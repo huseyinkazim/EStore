@@ -16,6 +16,9 @@ import { HomeComponent } from './pages/home/home.component';
 import { ProductComponent } from './pages/product/product.component';
 import { ShoppingCartComponent } from './pages/shopping-cart/shopping-cart/shopping-cart.component';
 import { BaseComponent } from './pages/base/base/base.component';
+import { OpenablebutonComponent } from './core/openablebuton/openablebuton.component';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { MatListModule } from '@angular/material/list';
 
 @NgModule({
   declarations: [
@@ -26,13 +29,16 @@ import { BaseComponent } from './pages/base/base/base.component';
     HomeComponent,
     ProductComponent,
     ShoppingCartComponent,
-    BaseComponent    
+    BaseComponent,
+    OpenablebutonComponent    
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
     HttpClientModule, 
+    MatExpansionModule,
+    MatListModule,
     BrowserAnimationsModule, // required animations module
     ToastrModule.forRoot(),// ToastrModule added
   ],

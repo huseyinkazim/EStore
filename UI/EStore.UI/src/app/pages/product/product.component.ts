@@ -5,6 +5,8 @@ import { ProductService } from './service/product.service';
 import { ResponseDto } from 'src/app/common/responsedto';
 import { BaseComponent } from '../base/base/base.component';
 import { AuthService } from 'src/app/service/auth.service';
+import { CategoryService } from 'src/app/service/category.service';
+import { Category } from 'src/app/common/Category';
 
 @Component({
   selector: 'app-product',
@@ -13,12 +15,15 @@ import { AuthService } from 'src/app/service/auth.service';
 })
 export class ProductComponent extends BaseComponent {
   products: ProductDto[] = [];
+  categories: Category[] = [];
   showCreate: boolean = false;
   showEdit: boolean = false;
   showDetails: boolean = false;
   selectedProduct: ProductDto = new ProductDto();
+  selectedCategory: Category = new Category();
   newProduct: ProductDto = new ProductDto();
   editingProduct: ProductDto = new ProductDto();
+  isCategoryOpen = true; 
   selectedSortOption = 'NUMARA11'; // Varsayılan sıralama seçeneği
   sortOptions = [
     { value: 'NUMARA11', label: 'Akıllı Sıralama' },
@@ -31,12 +36,13 @@ export class ProductComponent extends BaseComponent {
     { value: 'SELLER_GRADE', label: 'Mağaza Puanı' }
   ];
   constructor(private productService: ProductService,
+    private categoryService: CategoryService,
     protected override authService: AuthService) {
     super(authService);
   }
 
   ngOnInit(): void {
-
+    this.getCategoryMap();
     this.products = [
       {
         productId: 0,
@@ -105,13 +111,76 @@ export class ProductComponent extends BaseComponent {
         description: "Reeder S19 Max Pro 6 GB 256 GB (Reeder Türkiye Garantili)",
         categoryName: "Telefon",
         imageUrl: "https://n11scdn.akamaized.net/a1/226_339/01/81/34/55/IMG-2812823934010575074.jpg",
-        price: 4041.00 ,
+        price: 4041.00,
         quantity: 3,
         rating: 1.0
       }
     ];
 
     // this.getProducts();
+  }
+
+  getCategories(): void {
+    this.categoryService.getCategories().subscribe(
+      (data: Category[]) => {
+        // Initialize a map to store categories by their BaseCategoryId
+        const categoryMap = new Map<number, Category[]>();
+
+        // Group categories by BaseCategoryId
+        data.forEach(category => {
+          if (category.BaseCategoryId == null)
+            category.BaseCategoryId = 0;
+          if (!categoryMap.has(category.BaseCategoryId)) {
+            categoryMap.set(0, []);
+          }
+          categoryMap.get(category.BaseCategoryId)?.push(category);
+        });
+
+        // Populate subcategories based on BaseCategoryId
+        data.forEach(category => {
+          if (categoryMap.has(category.Id)) {
+            category.subCategories = categoryMap.get(category.Id) || [];
+          }
+        });
+
+        // Filter top-level categories (categories with BaseCategoryId 0)
+        this.categories = categoryMap.get(0) || [];
+      },
+      (error: any) => {
+
+      });
+
+    debugger;
+  }
+  getCategoryMap() {
+    var categoryString = '[{"Id":1,"CategoryName":"Yemek","BaseCategoryId":null,"subCategories":[{"Id":3,"CategoryName":"Ana Yemek","BaseCategoryId":1},{"Id":6,"CategoryName":"Tatlı","BaseCategoryId":1},{"Id":7,"CategoryName":"Aparatif","BaseCategoryId":1}]},{"Id":2,"CategoryName":"Elektronik","BaseCategoryId":null,"subCategories":[{"Id":4,"CategoryName":"Telefon","BaseCategoryId":2,"subCategories":[{"Id":5,"CategoryName":"Android Telefon","BaseCategoryId":4}]}]},{"Id":3,"CategoryName":"Ana Yemek","BaseCategoryId":1},{"Id":4,"CategoryName":"Telefon","BaseCategoryId":2,"subCategories":[{"Id":5,"CategoryName":"Android Telefon","BaseCategoryId":4}]},{"Id":5,"CategoryName":"Android Telefon","BaseCategoryId":4},{"Id":6,"CategoryName":"Tatlı","BaseCategoryId":1,"subCategories":[{"Id":5,"CategoryName":"Android Telefon","BaseCategoryId":4,"subCategories":[{"Id":5,"CategoryName":"Android Telefon","BaseCategoryId":4}]}]},{"Id":7,"CategoryName":"Aparatif","BaseCategoryId":1},{"Id":8,"CategoryName":"Temizlik","BaseCategoryId":null}]';
+    let data: Category[] = [];
+
+    data = JSON.parse(categoryString);
+
+    // Initialize a map to store categories by their BaseCategoryId
+    const categoryMap = new Map<number, Category[]>();
+
+    // Group categories by BaseCategoryId
+    data.forEach(category => {
+      if (category.BaseCategoryId == null)
+        category.BaseCategoryId = 0;
+      if (!categoryMap.has(category.BaseCategoryId)) {
+        categoryMap.set(category.BaseCategoryId, []);
+      }
+      categoryMap.get(category.BaseCategoryId)?.push(category);
+    });
+
+    // Populate subcategories based on BaseCategoryId
+    data.forEach(category => {
+      if (categoryMap.has(category.Id)) {
+        category.subCategories = categoryMap.get(category.Id) || [];
+      }
+    });
+
+    // Filter top-level categories (categories with BaseCategoryId 0)
+    this.categories = categoryMap.get(0) || [];
+    console.log(JSON.stringify(this.categories));
   }
 
   getProducts(): void {
@@ -189,7 +258,7 @@ export class ProductComponent extends BaseComponent {
       categoryName: '',
       imageUrl: '',
       quantity: 0,
-      rating:0
+      rating: 0
     };
   }
 
@@ -203,7 +272,7 @@ export class ProductComponent extends BaseComponent {
       categoryName: '',
       imageUrl: '',
       quantity: 0,
-      rating:0
+      rating: 0
     };
   }
 
@@ -218,12 +287,16 @@ export class ProductComponent extends BaseComponent {
     this.showDetails = false;
 
   }
-
+ toggleCategory(): void {
+    this.isCategoryOpen = !this.isCategoryOpen;
+  }
 
   onSortOptionChange(event: any) {
     this.selectedSortOption = event.target.value;
     // Burada sıralama seçeneği değiştiğinde yapılacak işlemleri ekleyebilirsiniz.
   }
+
+
 }
 
 

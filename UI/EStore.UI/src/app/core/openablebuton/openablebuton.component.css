@@ -1,0 +1,6 @@
+/* CSS dosyanızdaki gerekli stil düzenlemeleri */
+.mat-list-item {
+    font-weight: bold; /* Kategori adını koyu yapar */
+    text-transform: capitalize; /* İlk harfi büyük yapar */
+  }
+  

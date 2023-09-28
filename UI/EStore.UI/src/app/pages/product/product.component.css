@@ -187,11 +187,6 @@ a {
   left: 10px;
 }
 
-.product-name {
-  font-size: 16px;
-  margin: 10px 0;
-}
-
 .product-rating {
   display: flex;
   align-items: center;
@@ -208,17 +203,18 @@ a {
 
 
 
-/* İhtiyaca göre diğer stillemeleri ekleyebilirsiniz. */
 .product-card {
-  width: calc(33.33% - 20px);
+  width: calc(25% - 20px); /* Change this to 25% to fit 4 cards per row */
   border: 1px solid #ededed;
   padding: 10px;
   margin-bottom: 20px;
-  display: flex;
+  display: flex; /* Display as a flex container */
   flex-direction: column;
   justify-content: space-between;
-  height: 600px;
+  max-height: 500px; /* Limit the maximum height */
+  overflow: hidden; /* Hide content overflow */
 }
+
 
 .product-price {
   font-size: 18px;
@@ -293,3 +289,26 @@ a {
   line-height: 1.54;
   color: #007bff; /* Mavi renk */
 }
+
+.collapsible {
+  background-color: #777;
+  color: white;
+  cursor: pointer;
+  padding: 18px;
+  width: 100%;
+  border: none;
+  text-align: left;
+  outline: none;
+  font-size: 15px;
+}
+
+.active, .collapsible:hover {
+  background-color: #555;
+}
+
+/* .content {
+  padding: 0 18px;
+  display: none;
+  overflow: hidden;
+  background-color: #f1f1f1;
+} */

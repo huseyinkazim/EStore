@@ -13,8 +13,7 @@ import { ResponseDto } from 'src/app/common/responsedto';
 export class ProductService {
   private baseUrl = 'http://localhost:5083/api/Product';
 
-  constructor(private http: HttpClient,
-    private apiService: ApiService) { }
+  constructor(private apiService: ApiService) { }
 
   private handleError(error: any) {
     console.error(error);

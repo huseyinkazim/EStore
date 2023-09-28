@@ -5,6 +5,8 @@ using EStore.Service.ProductApi.Models.Dto;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Globalization;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<ApplicationDbContext>(option =>
@@ -45,8 +47,18 @@ app.Use((context, next) =>
 	// Call the next delegate/middleware in the pipeline
 	return next();
 });
-// Configure the HTTP request pipeline.
 
+app.MapGet("/Categories", () =>
+{
+	var optionsBuilder = new DbContextOptionsBuilder<ApplicationDbContext>();
+	optionsBuilder.UseSqlServer(builder.Configuration.GetConnectionString("myDb1"));
+	ApplicationDbContext dbContext = new ApplicationDbContext(optionsBuilder.Options);
+
+
+	var categories = dbContext.Categories.ToList();
+
+	return JsonSerializer.Serialize(categories);
+});
 app.UseAuthentication();
 app.UseAuthorization();
 

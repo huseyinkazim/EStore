@@ -1,0 +1,17 @@
+<ng-container *ngFor="let data of datas">
+    <ng-container *ngIf="data.subCategories && data.subCategories.length > 0; else nonSubCategories">
+      <mat-expansion-panel class="mat-elevation-z0">
+        <mat-expansion-panel-header>
+          <mat-panel-title>{{ data.CategoryName }}</mat-panel-title>
+        </mat-expansion-panel-header>
+        <mat-nav-list>
+          <!-- Recursive component call -->
+          <app-openablebuton [datas]="data.subCategories"></app-openablebuton>
+        </mat-nav-list>
+      </mat-expansion-panel>
+    </ng-container>
+    <ng-template #nonSubCategories>
+      <p mat-list-item>{{ data.CategoryName }}</p>
+    </ng-template>
+  </ng-container>
+  
